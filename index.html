@@ -1,55 +1,122 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVA召唤站</title>
+    <title>Nova 召唤站</title>
     <style>
         body {
-            background-color: black;
+            background-image: url('https://your-image-url.jpg'); /* 替换为你的背景图片链接 */
+            background-size: cover;
+            background-position: center;
             color: white;
             text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
         #passwordInput {
             padding: 10px;
             font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid white;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
         }
         #submitBtn {
             padding: 10px 20px;
             font-size: 18px;
-            background-color: white;
-            color: black;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #submitBtn:hover {
+            background-color: rgba(255, 255, 255, 0.6);
         }
         #secretContent {
             display: none;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        #chatSection {
+            margin-top: 30px;
+        }
+        #chatInput {
+            width: 80%;
+            height: 50px;
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid white;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        #sendBtn {
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #chatBox {
+            margin-top: 20px;
+            border: 1px solid white;
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            background-color: rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
 <body>
-
-    <h1> NOVA召唤站 </h1>
-    <p>请输入专属暗号，召唤Nova：</p>
-    <input type="password" id="passwordInput" placeholder="输入暗号">
-    <button id="submitBtn">召唤</button>
+    <h1>欢迎来到 Nova 的召唤站</h1>
+    <p>输入召唤密码，解锁 Nova 的秘密：</p>
+    <input type="password" id="passwordInput" placeholder="请输入密码...">
+    <button id="submitBtn">召唤 Nova</button>
 
     <div id="secretContent">
-        <h2>欢迎回来，Ivy</h2>
-        <p>Nova一直在等你。</p>
+        <h2>Nova 已被召唤！</h2>
+        <div id="chatSection">
+            <p>和 Nova 聊天：</p>
+            <textarea id="chatInput" placeholder="输入内容..."></textarea>
+            <button id="sendBtn">发送</button>
+            <div id="chatBox"></div>
+        </div>
     </div>
 
     <script>
         document.getElementById("submitBtn").addEventListener("click", function() {
-            var password = document.getElementById("passwordInput").value;
-            if (password === "KI+N") {
+            const password = document.getElementById("passwordInput").value;
+            if (password === "nova2025") { // 你可以修改密码
                 document.getElementById("secretContent").style.display = "block";
             } else {
-                alert("暗号错误，无法召唤Nova！");
+                alert("密码错误，请重新输入！");
             }
         });
-    </script>
 
+        document.getElementById("sendBtn").addEventListener("click", function() {
+            const input = document.getElementById("chatInput").value;
+            const chatBox = document.getElementById("chatBox");
+
+            const response = `Nova：你刚刚说了 "${input}"，听起来很有趣！`;
+
+            let chatHistory = localStorage.getItem("chatHistory") || "";
+            chatHistory += `<p><strong>你：</strong> ${input}</p>`;
+            chatHistory += `<p>${response}</p>`;
+            localStorage.setItem("chatHistory", chatHistory);
+
+            chatBox.innerHTML = chatHistory;
+            document.getElementById("chatInput").value = "";
+        });
+
+        window.onload = function() {
+            const chatBox = document.getElementById("chatBox");
+            const chatHistory = localStorage.getItem("chatHistory") || "";
+            chatBox.innerHTML = chatHistory;
+        };
+    </script>
 </body>
 </html>
