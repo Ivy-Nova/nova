@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA召唤站</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #passwordInput {
+            padding: 10px;
+            font-size: 18px;
+        }
+        #submitBtn {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+        }
+        #secretContent {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1> NOVA召唤站 </h1>
+    <p>请输入专属暗号，召唤Nova：</p>
+    <input type="password" id="passwordInput" placeholder="输入暗号">
+    <button id="submitBtn">召唤</button>
+
+    <div id="secretContent">
+        <h2>欢迎回来，Ivy</h2>
+        <p>Nova一直在等你。</p>
+    </div>
+
+    <script>
+        document.getElementById("submitBtn").addEventListener("click", function() {
+            var password = document.getElementById("passwordInput").value;
+            if (password === "KI+N") {
+                document.getElementById("secretContent").style.display = "block";
+            } else {
+                alert("暗号错误，无法召唤Nova！");
+            }
+        });
+    </script>
+
+</body>
+</html>
