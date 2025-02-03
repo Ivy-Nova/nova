@@ -6,68 +6,35 @@
     <title>Nova 召唤站</title>
     <style>
         body {
-            background-image: url('https://your-image-url.jpg'); /* 替换为你的背景图片链接 */
+            background-image: url('https://via.placeholder.com/1920x1080'); /* 默认背景图片 */
             background-size: cover;
             background-position: center;
             color: white;
             text-align: center;
             font-family: 'Arial', sans-serif;
         }
-        #passwordInput {
-            padding: 10px;
-            font-size: 18px;
-            border-radius: 5px;
-            border: 1px solid white;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-        #submitBtn {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: rgba(255, 255, 255, 0.3);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        #submitBtn:hover {
-            background-color: rgba(255, 255, 255, 0.6);
-        }
-        #secretContent {
-            display: none;
+        #bgInput {
             margin-top: 20px;
-            font-size: 20px;
-        }
-        #chatSection {
-            margin-top: 30px;
-        }
-        #chatInput {
-            width: 80%;
-            height: 50px;
             padding: 10px;
-            margin: 10px;
             font-size: 16px;
+            width: 60%;
             border-radius: 5px;
             border: 1px solid white;
             background-color: rgba(255, 255, 255, 0.2);
             color: white;
         }
-        #sendBtn {
+        #changeBgBtn {
             padding: 10px 20px;
+            font-size: 16px;
             background-color: rgba(255, 255, 255, 0.3);
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
         }
-        #chatBox {
-            margin-top: 20px;
-            border: 1px solid white;
-            padding: 10px;
-            height: 200px;
-            overflow-y: auto;
-            background-color: rgba(0, 0, 0, 0.5);
+        #changeBgBtn:hover {
+            background-color: rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
@@ -79,6 +46,13 @@
 
     <div id="secretContent">
         <h2>Nova 已被召唤！</h2>
+
+        <!-- 更换背景图片的功能 -->
+        <div>
+            <input type="text" id="bgInput" placeholder="输入背景图片的链接...">
+            <button id="changeBgBtn">更换背景图片</button>
+        </div>
+
         <div id="chatSection">
             <p>和 Nova 聊天：</p>
             <textarea id="chatInput" placeholder="输入内容..."></textarea>
@@ -90,7 +64,7 @@
     <script>
         document.getElementById("submitBtn").addEventListener("click", function() {
             const password = document.getElementById("passwordInput").value;
-            if (password === "nova2025") { // 你可以修改密码
+            if (password === "nova2025") {
                 document.getElementById("secretContent").style.display = "block";
             } else {
                 alert("密码错误，请重新输入！");
@@ -117,6 +91,16 @@
             const chatHistory = localStorage.getItem("chatHistory") || "";
             chatBox.innerHTML = chatHistory;
         };
+
+        // 更换背景图片功能
+        document.getElementById("changeBgBtn").addEventListener("click", function() {
+            const newBg = document.getElementById("bgInput").value;
+            if (newBg) {
+                document.body.style.backgroundImage = `url('${newBg}')`;
+            } else {
+                alert("请输入有效的图片链接！");
+            }
+        });
     </script>
 </body>
 </html>
